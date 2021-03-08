@@ -2,7 +2,11 @@
 const yargs = require("yargs/yargs");
 const { hideBin } = require("yargs/helpers");
 const chalk = require("chalk");
-const { buildGqlClient, createPostModel } = require("./src/utils");
+const { buildGqlClient } = require("./src/client");
+const { createModel } = require("./src/createModel");
+const prompts = require("prompts");
+const fetchMds = require("./src/fetchMds");
+const extractModel = require("./src/extractModel");
 
 const argv = hideBin(process.argv);
 
@@ -32,18 +36,27 @@ yargs(argv)
       if (!argv.path) {
         return console.error(chalk.red("You must specify a path"));
       }
+      // if (!argv.url) {
+      //   return console.error(chalk.red("You must specify your graphcms url"));
+      // }
+      // if (!argv.token) {
+      //   return console.error(chalk.red("You must specify your graphcms token"));
+      // }
 
-      if (!argv.url) {
-        return console.error(chalk.red("You must specify your graphcms url"));
-      }
-      if (!argv.token) {
-        return console.error(chalk.red("You must specify your graphcms token"));
-      }
+      const response = await prompts({
+        type: "text",
+        name: "modelName",
+        message: 'How do you want to call the model? (Defaults to "Post")',
+      });
 
-      await buildGqlClient(argv.url, argv.token);
-      await createPostModel(argv.url, argv.token);
+      const files = await fetchMds(argv.path);
+      const model = extractModel(files?.[0]);
 
-      console.log(argv);
+      await createModel(argv.url, argv.token, model, response.modelName);
+
+      console.log(model);
+
+      // await buildGqlClient(argv.url, argv.token);
     }
   )
   .option("verbose", {

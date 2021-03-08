@@ -9,7 +9,7 @@ It also gives you an admin UI to create istances of these entities. They also ha
 
 ## What does this migrator do?
 
-Basically you can give it a folder full of md files and it will try to create a "Post" entity on your GraphCMS istance and it will just create as many posts as the number of your md files with their content in it.
+Basically you can give it a folder full of md files and it will try to create a "Post" entity on your GraphCMS istance and it will just create as many posts as the number of your md files with their content in it. (it will recursively find the files between all your folders).
 <br/><br/>
 **This package will try to recreate the model from the first markdown it encounters.**<br/>
 This means that if you have markdowns with different yaml sections, you need to create two separate folder where you'll run this migrator.<br/>
@@ -22,3 +22,8 @@ This means that if you have markdowns with different yaml sections, you need to 
 ## Usage
 
 just run `npx md-to-graphcms --path ./your-path --url https://your-istance.com --token <token>` and watch the magic happen :)
+
+### TODO
+
+- Adding logs
+- Adding tests

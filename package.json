@@ -4,6 +4,7 @@
   "description": "A CLI tool to automate the migration from markdown files to graphcms (useful for gatsby blogs for example and everything else)",
   "main": "index.js",
   "scripts": {
+    "start": "./index.js migrate --path ./example",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
@@ -31,10 +32,13 @@
   "dependencies": {
     "@graphcms/management": "^0.0.19",
     "chalk": "^4.1.0",
+    "glob": "^7.1.6",
     "graphql": "^15.5.0",
     "graphql-request": "^3.4.0",
+    "gray-matter": "^4.0.2",
     "node-fetch": "^2.6.1",
     "prompts": "^2.4.0",
+    "string-sanitizer": "^1.1.1",
     "yargs": "^16.2.0"
   },
   "devDependencies": {
