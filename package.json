@@ -6,6 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "md-to-graph": "./index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/giacomocerquone/graphcms-markdown-migrator.git"
@@ -24,5 +27,16 @@
   "bugs": {
     "url": "https://github.com/giacomocerquone/graphcms-markdown-migrator/issues"
   },
-  "homepage": "https://github.com/giacomocerquone/graphcms-markdown-migrator#readme"
+  "homepage": "https://github.com/giacomocerquone/graphcms-markdown-migrator#readme",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "graphql": "^15.5.0",
+    "graphql-request": "^3.4.0",
+    "node-fetch": "^2.6.1",
+    "prompts": "^2.4.0",
+    "yargs": "^16.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.21.0"
+  }
 }
