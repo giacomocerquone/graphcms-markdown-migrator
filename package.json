@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/giacomocerquone/graphcms-markdown-migrator#readme",
   "dependencies": {
+    "@graphcms/management": "^0.0.19",
     "chalk": "^4.1.0",
     "graphql": "^15.5.0",
     "graphql-request": "^3.4.0",

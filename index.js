@@ -2,7 +2,7 @@
 const yargs = require("yargs/yargs");
 const { hideBin } = require("yargs/helpers");
 const chalk = require("chalk");
-const { buildGqlClient } = require("./utils");
+const { buildGqlClient, createPostModel } = require("./src/utils");
 
 const argv = hideBin(process.argv);
 
@@ -40,7 +40,8 @@ yargs(argv)
         return console.error(chalk.red("You must specify your graphcms token"));
       }
 
-      buildGqlClient(argv.url, argv.token);
+      await buildGqlClient(argv.url, argv.token);
+      await createPostModel(argv.url, argv.token);
 
       console.log(argv);
     }

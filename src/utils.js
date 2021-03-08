@@ -11,17 +11,7 @@ const buildGqlClient = (endpoint, token) => {
   });
 };
 
-const createPostModel = async () => {
-  try {
-    const data = await client.request(queries.postModelCreation);
-    console.log(data);
-  } catch (e) {
-    console.log(e);
-  }
-};
-
 module.exports = {
   getGqlClient,
   buildGqlClient,
-  createPostModel,
 };
