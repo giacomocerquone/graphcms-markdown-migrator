@@ -36,6 +36,7 @@ You can provide the following optional parameters to the CLI:
 
 ### TODO
 
-- Adding logs
-- Adding tests
-- Adding content media upload
+- Add logs
+- Add tests
+- Add content media upload
+- Add possibility to exclude certain fields from the extracted model

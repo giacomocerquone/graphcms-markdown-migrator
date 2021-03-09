@@ -12,6 +12,8 @@ const { capitalize } = require("./src/utils");
 
 const argv = hideBin(process.argv);
 
+console.log(argv);
+
 yargs(argv).command(
   "$0 [path] [url] [token]",
   "start the migration of the md files in the specified path.",
@@ -40,7 +42,7 @@ yargs(argv).command(
         alias: "v",
         type: "boolean",
         description: "Run with verbose logging",
-      }).argv;
+      });
   },
   async (argv) => {
     if (argv.verbose) console.info(`start server on :${argv.port}`);
@@ -72,4 +74,4 @@ yargs(argv).command(
     await buildGqlClient(argv.url, argv.token);
     await uploadMds(mds, capitalize(response.modelName), argv.token, argv.url);
   }
-);
+).argv;
