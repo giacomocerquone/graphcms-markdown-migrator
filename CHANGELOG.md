@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.1.0](https://github.com/giacomocerquone/graphcms-markdown-migrator/compare/v0.0.2...v0.1.0) (2021-03-09)
+
+
+### Features
+
+* add capitalization util function ([15767cc](https://github.com/giacomocerquone/graphcms-markdown-migrator/commit/15767cce2318fd8905626fae420c196819fe56c5))
+
+
+### Bug Fixes
+
+* update readme, fix index.js ([7f17a51](https://github.com/giacomocerquone/graphcms-markdown-migrator/commit/7f17a5152b3db7983db255864e4788679f2b9cd4))
+
 ### 0.0.2 (2021-03-09)
 
 
