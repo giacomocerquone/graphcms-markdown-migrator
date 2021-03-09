@@ -8,6 +8,7 @@ const prompts = require("prompts");
 const fetchMds = require("./src/fetchMds");
 const extractModel = require("./src/extractModel");
 const uploadMds = require("./src/uploadMds");
+const { capitalize } = require("./src/utils");
 
 const argv = hideBin(process.argv);
 
@@ -62,8 +63,13 @@ yargs(argv).command(
     const mds = await fetchMds(argv.path);
     const model = extractModel(mds?.[0]);
 
-    await createModel(argv.url, argv.token, model, response.modelName);
+    await createModel(
+      argv.url,
+      argv.token,
+      model,
+      capitalize(response.modelName)
+    );
     await buildGqlClient(argv.url, argv.token);
-    await uploadMds(mds, response.modelName, argv.token, argv.url);
+    await uploadMds(mds, capitalize(response.modelName), argv.token, argv.url);
   }
 );
