@@ -12,8 +12,6 @@ const { capitalize } = require("./src/utils");
 
 const argv = hideBin(process.argv);
 
-console.log(argv);
-
 yargs(argv).command(
   "$0 [path] [url] [token]",
   "start the migration of the md files in the specified path.",
