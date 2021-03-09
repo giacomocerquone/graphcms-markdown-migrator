@@ -1,4 +1,4 @@
-const { FieldType } = require("@graphcms/management");
+const { FieldType, Renderer } = require("@graphcms/management");
 const string = require("string-sanitizer");
 const matter = require("gray-matter");
 
@@ -15,7 +15,8 @@ const extractModel = (md) => {
     if (frontKey === "content") {
       return {
         name: "content",
-        type: FieldType.Richtext,
+        type: FieldType.String,
+        formRenderer: Renderer.Markdown,
       };
     }
     if (typeof value === "boolean") {

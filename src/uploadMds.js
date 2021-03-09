@@ -15,9 +15,8 @@ const uploadMds = (mds, modelName) => {
   return Promise.all(
     mds.map((md) => {
       const { content, data } = matter(md);
-      // need to create AST from markdown
       return client.request(produceMutation(modelName), {
-        data: { content: content, ...data },
+        data: { content, ...data },
       });
     })
   );

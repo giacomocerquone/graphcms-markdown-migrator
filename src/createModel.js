@@ -13,6 +13,9 @@ const createModel = async (url, token, model, modelName = "Post") => {
           apiId: modelField.name,
           displayName: modelField.name,
           type: modelField.type,
+          ...(modelField.formRenderer && {
+            formRenderer: modelField.formRenderer,
+          }),
         });
         return acc;
       },
