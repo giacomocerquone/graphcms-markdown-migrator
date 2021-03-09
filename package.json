@@ -1,11 +1,15 @@
 {
   "name": "graphcms-markdown-migrator",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A CLI tool to automate the migration from markdown files to graphcms (useful for gatsby blogs for example and everything else)",
   "main": "index.js",
   "scripts": {
     "start": "./index.js migrate --path ./example -u https://api-eu-central-1.graphcms.com/v2/cklz96ohfx2ou01xp2iff9hxc/master",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "standard-version",
+    "release:minor": "standard-version --release-as minor",
+    "release:patch": "standard-version --release-as patch",
+    "release:major": "standard-version --release-as major"
   },
   "bin": {
     "md-to-graph": "./index.js"
@@ -43,6 +47,7 @@
     "yargs": "^16.2.0"
   },
   "devDependencies": {
-    "eslint": "^7.21.0"
+    "eslint": "^7.21.0",
+    "standard-version": "^9.1.0"
   }
 }
