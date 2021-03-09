@@ -1,26 +1,27 @@
-const { newMigration, FieldType } = require("@graphcms/management");
+const { newMigration } = require("@graphcms/management");
 
 const createModel = async (url, token, model, modelName = "Post") => {
   try {
     const migration = newMigration({
       authToken: token,
       endpoint: url,
-      name: "Creating post model",
     });
 
-    migration.createModel({
-      apiId: modelName,
-      apiIdPlural: `${modelName}s`,
-      displayName: modelName,
-    });
-
-    model.forEach((modelField) => {
-      migration.addSimpleField({
-        apiId: modelField.name,
-        displayName: modelField.name,
-        type: FieldType.String,
-      });
-    });
+    model.reduce(
+      (acc, modelField) => {
+        acc.addSimpleField({
+          apiId: modelField.name,
+          displayName: modelField.name,
+          type: modelField.type,
+        });
+        return acc;
+      },
+      migration.createModel({
+        apiId: modelName,
+        apiIdPlural: `${modelName}s`,
+        displayName: modelName,
+      })
+    );
 
     const { errors, name } = await migration.run(true);
 
@@ -33,7 +34,7 @@ const createModel = async (url, token, model, modelName = "Post") => {
       console.log(name);
     }
   } catch (e) {
-    console.log("errors creating model");
+    console.log("errors creating model", e);
   }
 };
 

@@ -2,16 +2,22 @@ const { FieldType } = require("@graphcms/management");
 const string = require("string-sanitizer");
 const matter = require("gray-matter");
 
-const extractModel = (post) => {
-  const { data } = matter(post);
+const extractModel = (md) => {
+  const { data } = matter(md);
 
   if (!data) {
     throw new Error("The first MD doesn't seem to have a yaml frontmatter");
   }
 
-  return Object.keys(data).map((frontKey) => {
+  return Object.keys({ ...data, content: "" }).map((frontKey) => {
     const value = data[frontKey];
 
+    if (frontKey === "content") {
+      return {
+        name: "content",
+        type: FieldType.Richtext,
+      };
+    }
     if (typeof value === "boolean") {
       return {
         name: string.sanitize(frontKey),
