@@ -2,7 +2,7 @@ const { gql } = require("graphql-request");
 const { getGqlClient } = require("./client");
 const matter = require("gray-matter");
 
-const produceMutation = (modelName = "Post") => gql`
+const produceMutation = (modelName) => gql`
 mutation uploadMds($data: ${modelName}CreateInput!) {
   create${modelName}(data: $data) {
     id

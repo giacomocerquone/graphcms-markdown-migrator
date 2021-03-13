@@ -1,14 +1,13 @@
 #!/usr/bin/env node
 const yargs = require("yargs/yargs");
 const { hideBin } = require("yargs/helpers");
-const chalk = require("chalk");
 const { buildGqlClient } = require("./src/client");
 const createModel = require("./src/createModel");
 const prompts = require("prompts");
 const fetchMds = require("./src/fetchMds");
 const extractModel = require("./src/extractModel");
 const uploadMds = require("./src/uploadMds");
-const { capitalize } = require("./src/utils");
+const { capitalize, logger, spinner, restartSpinner } = require("./src/utils");
 
 const argv = hideBin(process.argv);
 
@@ -36,40 +35,66 @@ yargs(argv).command(
         type: "string",
         description: "Your graphCMS token",
       })
-      .option("verbose", {
-        alias: "v",
-        type: "boolean",
-        description: "Run with verbose logging",
+      .option("post-thumbnail", {
+        alias: "pt",
+        type: "string",
+        description:
+          'The name of the yaml field to recognize as a post thumbnail (it will be uploaded automatically to the "Asset" model)',
+      })
+      .option("exclude", {
+        alias: "exc",
+        type: "string",
+        description:
+          "Comma separated list of fields to exclude from your mds frontmatter",
       });
   },
   async (argv) => {
-    if (argv.verbose) console.info(`start server on :${argv.port}`);
     if (!argv.path) {
-      return console.error(chalk.red("You must specify a path"));
+      return logger.error("You must specify a path");
     }
     if (!argv.url) {
-      return console.error(chalk.red("You must specify your graphcms url"));
+      return logger.error("You must specify your graphcms url");
     }
     if (!argv.token) {
-      return console.error(chalk.red("You must specify your graphcms token"));
+      return logger.error("You must specify your graphcms token");
     }
 
-    const response = await prompts({
-      type: "text",
-      name: "modelName",
-      message: 'How do you want to call the model? (Defaults to "Post")',
-    });
-
-    const mds = await fetchMds(argv.path);
-    const model = extractModel(mds?.[0]);
-
-    await createModel(
-      argv.url,
-      argv.token,
-      model,
-      capitalize(response.modelName)
+    const response = await prompts(
+      {
+        type: "text",
+        name: "modelName",
+        message: 'How do you want to call the model? (Defaults to "Post")',
+      },
+      { onCancel: () => process.exit() }
     );
-    await buildGqlClient(argv.url, argv.token);
-    await uploadMds(mds, capitalize(response.modelName), argv.token, argv.url);
+
+    if (!response.modelName) {
+      response.modelName = "Post";
+    }
+
+    try {
+      restartSpinner("Fetching and parsing mds file");
+      const mds = await fetchMds(argv.path);
+      restartSpinner("Extracting model from first md file");
+      const model = extractModel(mds?.[0]);
+      restartSpinner("Creating the model inside your graphCMS instance");
+      await createModel(
+        argv.url,
+        argv.token,
+        model,
+        capitalize(response.modelName)
+      );
+      restartSpinner("Creating the mds inside your graphCMS instance");
+      await buildGqlClient(argv.url, argv.token);
+      await uploadMds(
+        mds,
+        capitalize(response.modelName),
+        argv.token,
+        argv.url
+      );
+      spinner.succeed();
+    } catch (e) {
+      logger.error("Something went wrong", e);
+    }
   }
 ).argv;

@@ -1,6 +1,7 @@
 const { newMigration } = require("@graphcms/management");
+const { logger } = require("./utils");
 
-const createModel = async (url, token, model, modelName = "Post") => {
+const createModel = async (url, token, model, modelName) => {
   try {
     const migration = newMigration({
       authToken: token,
@@ -29,15 +30,15 @@ const createModel = async (url, token, model, modelName = "Post") => {
     const { errors, name } = await migration.run(true);
 
     if (errors) {
-      console.log(errors);
+      logger.error(errors);
       throw errors;
     }
 
     if (name) {
-      console.log(name);
+      logger.info(name);
     }
   } catch (e) {
-    console.log("errors creating model", e);
+    logger.error("errors creating model", e);
   }
 };
 
