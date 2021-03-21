@@ -51,8 +51,6 @@ const uploadMds = (mds, modelName, thumbField, token, url) => {
               id: uploadRes.id,
             },
           };
-
-          logger.info(queryVars);
         }
 
         return client.request(produceMutation(modelName), queryVars);
