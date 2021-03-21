@@ -94,6 +94,7 @@ yargs(argv).command(
       await uploadMds(
         mds,
         capitalize(response.modelName),
+        argv.thumb_field,
         argv.token,
         argv.url
       );

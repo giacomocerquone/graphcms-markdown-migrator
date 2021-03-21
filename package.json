@@ -36,6 +36,7 @@
   "dependencies": {
     "@graphcms/management": "^0.0.19",
     "chalk": "^4.1.0",
+    "form-data": "^4.0.0",
     "glob": "^7.1.6",
     "graphql": "^15.5.0",
     "graphql-request": "^3.4.0",

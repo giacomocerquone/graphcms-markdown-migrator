@@ -3,7 +3,7 @@ const string = require("string-sanitizer");
 const matter = require("gray-matter");
 
 const extractModel = (md, thumbField) => {
-  const { data } = matter(md);
+  const { data } = matter(md.fileRead);
 
   if (!data) {
     throw new Error("The first MD doesn't seem to have a yaml frontmatter");
