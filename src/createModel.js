@@ -1,5 +1,5 @@
 const { newMigration } = require("@graphcms/management");
-const { logger } = require("./utils");
+const { logger, spinner } = require("./utils");
 
 const createModel = async (url, token, model, modelName) => {
   try {
@@ -10,14 +10,24 @@ const createModel = async (url, token, model, modelName) => {
 
     model.reduce(
       (acc, modelField) => {
-        acc.addSimpleField({
-          apiId: modelField.name,
-          displayName: modelField.name,
-          type: modelField.type,
-          ...(modelField.formRenderer && {
-            formRenderer: modelField.formRenderer,
-          }),
-        });
+        if (modelField.model) {
+          acc.addRelationalField({
+            apiId: modelField.name,
+            displayName: modelField.name,
+            relationType: modelField.relationType,
+            model: modelField.model,
+          });
+        } else {
+          acc.addSimpleField({
+            apiId: modelField.name,
+            displayName: modelField.name,
+            type: modelField.type,
+            ...(modelField.formRenderer && {
+              formRenderer: modelField.formRenderer,
+            }),
+          });
+        }
+
         return acc;
       },
       migration.createModel({
@@ -38,7 +48,9 @@ const createModel = async (url, token, model, modelName) => {
       logger.info(name);
     }
   } catch (e) {
+    spinner.fail();
     logger.error("errors creating model", e);
+    process.exit();
   }
 };
 

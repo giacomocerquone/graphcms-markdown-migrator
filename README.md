@@ -38,4 +38,4 @@ You can provide the following optional parameters to the CLI:
 
 - Add tests
 - Add content media upload
-- Add possibility to exclude certain fields from the extracted model
+- Add possibility to exclude specific fields from the extracted model

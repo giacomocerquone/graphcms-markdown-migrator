@@ -35,8 +35,7 @@ yargs(argv).command(
         type: "string",
         description: "Your graphCMS token",
       })
-      .option("post-thumbnail", {
-        alias: "pt",
+      .option("thumb_field", {
         type: "string",
         description:
           'The name of the yaml field to recognize as a post thumbnail (it will be uploaded automatically to the "Asset" model)',
@@ -59,6 +58,12 @@ yargs(argv).command(
       return logger.error("You must specify your graphcms token");
     }
 
+    if (!argv.thumb_field) {
+      logger.warn(
+        "You didn't specify any yaml field to be used as post thumbnail"
+      );
+    }
+
     const response = await prompts(
       {
         type: "text",
@@ -76,7 +81,7 @@ yargs(argv).command(
       restartSpinner("Fetching and parsing mds file");
       const mds = await fetchMds(argv.path);
       restartSpinner("Extracting model from first md file");
-      const model = extractModel(mds?.[0]);
+      const model = extractModel(mds?.[0], argv.thumb_field);
       restartSpinner("Creating the model inside your graphCMS instance");
       await createModel(
         argv.url,
@@ -94,7 +99,9 @@ yargs(argv).command(
       );
       spinner.succeed();
     } catch (e) {
+      spinner.fail();
       logger.error("Something went wrong", e);
+      process.exit();
     }
   }
 ).argv;

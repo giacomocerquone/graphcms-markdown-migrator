@@ -1,8 +1,8 @@
-const { FieldType, Renderer } = require("@graphcms/management");
+const { FieldType, Renderer, RelationType } = require("@graphcms/management");
 const string = require("string-sanitizer");
 const matter = require("gray-matter");
 
-const extractModel = (md) => {
+const extractModel = (md, thumbField) => {
   const { data } = matter(md);
 
   if (!data) {
@@ -12,6 +12,13 @@ const extractModel = (md) => {
   return Object.keys({ ...data, content: "" }).map((frontKey) => {
     const value = data[frontKey];
 
+    if (frontKey === thumbField) {
+      return {
+        name: frontKey,
+        model: "Asset",
+        relationType: RelationType.OneToOne,
+      };
+    }
     if (frontKey === "content") {
       return {
         name: "content",
