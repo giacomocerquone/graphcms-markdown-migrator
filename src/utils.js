@@ -39,9 +39,12 @@ const restartSpinner = (text) => {
   spinner.start();
 };
 
+const imgsInMdReg = /!(?<alt>\[[^\]]*\])\((?<filename>.*?)(?="|\))(?<optionalpart>".*")?\)/g;
+
 module.exports = {
   capitalize,
   logger,
   spinner,
   restartSpinner,
+  imgsInMdReg,
 };

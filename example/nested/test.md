@@ -9,3 +9,5 @@ draft: false
 ---
 
 test2
+
+![my switch](./switch.png)

@@ -4,7 +4,7 @@
   "description": "A CLI tool to automate the migration from markdown files to graphcms (useful for gatsby blogs for example and everything else)",
   "main": "index.js",
   "scripts": {
-    "start": "./index.js --path ./example -u https://api-eu-central-1.graphcms.com/v2/ckm270ffm954i01z50yr3eylb/master",
+    "start": "./index.js --path ./example -u https://api-eu-central-1.graphcms.com/v2/ckml7qpvfgf6n01z28xbq03j4/master",
     "test": "echo \"Error: no test specified\" && exit 1",
     "release": "standard-version",
     "release:minor": "standard-version --release-as minor",
