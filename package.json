@@ -1,6 +1,6 @@
 {
   "name": "graphcms-markdown-migrator",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A CLI tool to automate the migration from markdown files to graphcms (useful for gatsby blogs for example and everything else)",
   "main": "index.js",
   "scripts": {

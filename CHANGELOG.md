@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://github.com/giacomocerquone/graphcms-markdown-migrator/compare/v0.1.0...v0.2.0) (2021-03-22)
+
+
+### Features
+
+* add asset reference in model creation if thumb_field command option is specified ([69e72a1](https://github.com/giacomocerquone/graphcms-markdown-migrator/commit/69e72a1f1abc1fee9c63d81ad34c2f4e75797f63))
+* implement automatic assets upload ([6d44f54](https://github.com/giacomocerquone/graphcms-markdown-migrator/commit/6d44f54cfb8263c07d0183917fa7fbe6c372a1b0))
+* implement post thumbnail upload and connection in the gql mutation ([c9149e8](https://github.com/giacomocerquone/graphcms-markdown-migrator/commit/c9149e8deb5b997f7971fa3c738f73e89598cf22))
+* introduce winston, cli spinner, better model handling ([770b721](https://github.com/giacomocerquone/graphcms-markdown-migrator/commit/770b7216b8108113933eef8ee8c54460b7b3e6d0))
+
 ## [0.1.0](https://github.com/giacomocerquone/graphcms-markdown-migrator/compare/v0.0.2...v0.1.0) (2021-03-09)
 
 
