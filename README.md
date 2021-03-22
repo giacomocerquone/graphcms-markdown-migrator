@@ -37,5 +37,5 @@ You can provide the following optional parameters to the CLI:
 ### TODO
 
 - Add tests
-- Add content media upload
 - Add possibility to exclude specific fields from the extracted model
+- Implement auto-publish option
