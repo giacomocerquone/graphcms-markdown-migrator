@@ -128,7 +128,7 @@ yargs(argv).command(
       restartSpinner("Extracting model from first md file");
       const model = extractModel(
         extractModelFrom,
-        argv.thumb_field,
+        argv["thumb-field"],
         argv.exclude ? argv.exclude.split(", ") : []
       );
       restartSpinner("Creating the model inside your graphCMS instance");
@@ -143,7 +143,7 @@ yargs(argv).command(
       await uploadMds(
         mds,
         capitalize(promptsRes.modelName),
-        argv.thumb_field,
+        argv["thumb-field"],
         argv.token,
         argv.url
       );
