@@ -1,7 +1,7 @@
 {
   "name": "graphcms-markdown-migrator",
   "version": "0.2.0",
-  "description": "A CLI tool to automate the migration from markdown files to graphcms (useful for gatsby blogs for example and everything else)",
+  "description": "A CLI tool to automate the migration from markdown files to GraphCMS (useful for gatsby blogs for example and everything else)",
   "main": "index.js",
   "scripts": {
     "start": "./index.js --path ./example -u https://api-eu-central-1.graphcms.com/v2/ckml7qpvfgf6n01z28xbq03j4/master",

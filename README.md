@@ -7,7 +7,7 @@ It also gives you an admin UI to create instances of these entities. They also h
 
 ## What does this migrator do?
 
-Basically, you can give it a folder full of MD files, and it will try to create a "Post" entity on your GraphCMS instance, and it will just create as many posts as the number of your MD files with their content in it. (it will recursively find the files between all your folders).
+You can give it a folder full of MD files, and it will try to create a "Post" entity on your GraphCMS instance, and it will create as many posts as the number of your MD files with their content in it. (it will recursively find the files between all your folders). It also uploads your media and the thumbnail of every post in the pre-configured Asset model in GraphCMS.
 <br/><br/>
 **This package will try to recreate the model from the first markdown it encounters.**<br/>
 It means that if you have markdowns with different YAML sections, you need to create two separate folders where you'll run this migrator.<br/>
