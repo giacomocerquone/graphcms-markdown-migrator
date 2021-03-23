@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.1](https://github.com/giacomocerquone/graphcms-markdown-migrator/compare/v0.3.0...v0.3.1) (2021-03-23)
+
+
+### Bug Fixes
+
+* typo over thumb-field property name ([4ff8810](https://github.com/giacomocerquone/graphcms-markdown-migrator/commit/4ff8810a78dd17003deddc57498c53b6a51c4685))
+
 ## [0.3.0](https://github.com/giacomocerquone/graphcms-markdown-migrator/compare/v0.2.0...v0.3.0) (2021-03-23)
 
 
