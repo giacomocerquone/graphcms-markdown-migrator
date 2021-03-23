@@ -48,7 +48,7 @@ yargs(argv).command(
         .option("exclude", {
           type: "string",
           description:
-            "Comma separated list of fields to exclude from your mds frontmatter",
+            'Comma separated list of fields to exclude from your mds frontmatter: "field1, field2, field3"',
         })
         .option("model-from", {
           type: "string",
@@ -94,18 +94,20 @@ yargs(argv).command(
       );
     }
 
-    const promptsRes = await prompts(
-      {
-        type: "text",
-        name: "modelName",
-        message: 'How do you want to call the model? (Defaults to "Post")',
-      },
-      { onCancel: () => process.exit() }
-    );
+    let promptsRes = {};
 
-    if (!promptsRes.modelName) {
-      promptsRes.modelName = "Post";
+    if (!argv["model-name"]) {
+      promptsRes = await prompts(
+        {
+          type: "text",
+          name: "modelName",
+          message: 'How do you want to call the model? (Defaults to "Post")',
+        },
+        { onCancel: () => process.exit() }
+      );
     }
+
+    promptsRes.modelName = promptsRes.modelName || argv["model-name"] || "Post";
 
     try {
       restartSpinner("Fetching and parsing mds file");
@@ -124,7 +126,11 @@ yargs(argv).command(
           ]
         : mds[0];
       restartSpinner("Extracting model from first md file");
-      const model = extractModel(extractModelFrom, argv.thumb_field);
+      const model = extractModel(
+        extractModelFrom,
+        argv.thumb_field,
+        argv.exclude ? argv.exclude.split(", ") : []
+      );
       restartSpinner("Creating the model inside your graphCMS instance");
       await createModel(
         argv.url,
