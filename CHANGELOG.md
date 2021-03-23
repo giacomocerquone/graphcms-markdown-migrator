@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/giacomocerquone/graphcms-markdown-migrator/compare/v0.2.0...v0.3.0) (2021-03-23)
+
+
+### Features
+
+* add possibility to extract the model from a specific md file ([f72cb3f](https://github.com/giacomocerquone/graphcms-markdown-migrator/commit/f72cb3f1cf61b2f144e30a9c4555527215760609))
+* implement exclude option ([4742bce](https://github.com/giacomocerquone/graphcms-markdown-migrator/commit/4742bcebdd7b80609b64a9d300bdcc9e31720142))
+
 ## [0.2.0](https://github.com/giacomocerquone/graphcms-markdown-migrator/compare/v0.1.0...v0.2.0) (2021-03-22)
 
 
