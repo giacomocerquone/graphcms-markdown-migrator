@@ -15,7 +15,10 @@ It means that if you have markdowns with different YAML sections, you need to cr
 ## Prerequisites
 
 - The URL of your GraphCMS instance
-- A token with the "Management API Access" turned on![Management API access graph cms token](./assets/token-creation.png)
+- A token with the "Management API Access" turned on.<br/>
+  To do this, click first "edit" on the token you chose and then check the boxes like this:
+
+![Management API access graph cms token](./assets/token-creation.png)
 
 ## Usage
 
@@ -30,12 +33,23 @@ npx md-to-graphcms --path ./your-path --url https://your-istance.com --token <to
 You can provide the following optional parameters to the CLI:
 
 ```
--v for verbose mode
--p to publish also the created entities over graphCMS (defaults to draft)
+Options:
+  -p, --path         Path of the folder of the MD files to migrate.    [stringa]
+  -u, --url          Your graphCMS URL                                 [stringa]
+  -t, --token        Your graphCMS token                               [stringa]
+      --thumb-field  The name of the YAML field to recognize as a post thumbnail
+                     (it will upload the thumbnails automatically into the "Asset" model)
+                                                                       [stringa]
+      --exclude      Comma separated list of fields to exclude from your MDs
+                     frontmatter: "field1, field2, field3"             [stringa]
+      --model-from   The filename of the specific MD file to use to extract the
+                     model (you must add the ".md" extension when specifying it)
+                                                                       [stringa]
+      --model-name   The name of the model to create in GraphCMS
+                     (Defaults to "Post")                              [stringa]
 ```
 
 ### TODO
 
 - Add tests
-- Add possibility to exclude specific fields from the extracted model
 - Implement auto-publish option

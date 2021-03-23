@@ -15,7 +15,7 @@ const argv = hideBin(process.argv);
 
 yargs(argv).command(
   "$0 [path] [url] [token]",
-  "start the migration of the md files in the specified path.",
+  "start the migration of the md files from the specified path to the specified GraphCMS instance.",
   (yargs) => {
     return (
       yargs
