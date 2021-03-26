@@ -27,48 +27,15 @@ const uploadFile = (token, path, url) => {
   });
 };
 
-const asyncStringReplace = (str, regex, aReplacer, selfArg) => {
-  let substrs = [],
-    accstr = "";
-  let resetIndex = 0;
-  let pendingPromises = 0;
-  let accept = null;
-  for (let match = regex.exec(str); match !== null; match = regex.exec(str)) {
-    if (resetIndex === regex.lastIndex) {
-      regex.lastIndex += 1;
-      continue;
-    }
-    // call the async replacer function with the matched array
-    const retValue = aReplacer.apply(selfArg, match);
-    if (retValue instanceof Promise) {
-      const index = substrs.push(accstr, "") - 1;
-      accstr = "";
-      pendingPromises += 1;
-      const thenAfter = (returnValue) => {
-        substrs[index] = returnValue += "";
-        pendingPromises -= 1;
-        if (pendingPromises === 0 && accept !== null) accept(substrs.join(""));
-      };
-      retValue.then(thenAfter, thenAfter);
-    } else {
-      accstr += retValue;
-    }
-    resetIndex = regex.lastIndex;
-  }
-  accstr += str.substring(resetIndex);
-  // wait for aReplacer calls to finish and join them back into string
-  if (pendingPromises === 0) {
-    return accstr;
-  } else {
-    // put the rest of str
-    substrs.push(accstr);
-    accstr = "";
-    return new Promise(function (acceptFunc) {
-      accept = acceptFunc;
-      if (pendingPromises === 0) accept(substrs.join(""));
-    });
-  }
-};
+async function replaceAsync(str, regex, asyncFn) {
+  const promises = [];
+  str.replace(regex, (match, ...args) => {
+    const promise = asyncFn(match, ...args);
+    promises.push(promise);
+  });
+  const data = await Promise.all(promises);
+  return str.replace(regex, () => data.shift());
+}
 
 const uploadMds = (mds, modelName, thumbField, token, url) => {
   const client = getGqlClient();
@@ -96,7 +63,7 @@ const uploadMds = (mds, modelName, thumbField, token, url) => {
           };
         }
 
-        queryVars.data.content = await asyncStringReplace(
+        queryVars.data.content = await replaceAsync(
           content,
           imgsInMdReg,
           async (...groups) => {
