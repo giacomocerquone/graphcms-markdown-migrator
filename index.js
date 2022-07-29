@@ -138,6 +138,8 @@ yargs(argv).command(
         model,
         capitalize(promptsRes.modelName)
       );
+      restartSpinner("Waiting 10 seconds for graphCMS to process the new model ¯\_(ツ)_/¯");
+      await new Promise(r => setTimeout(r, 10000));
       restartSpinner("Creating the mds inside your graphCMS instance");
       await buildGqlClient(argv.url, argv.token);
       await uploadMds(
